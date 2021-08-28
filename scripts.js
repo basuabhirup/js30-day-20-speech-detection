@@ -8,7 +8,13 @@ const words = document.querySelector('.words');
 words.appendChild(p);
 
 recognition.addEventListener('result', e => {
-  console.log(e);
+  p.textContent = e.results[0][0].transcript;
+  if(e.results[0].isFinal) {
+    p = document.createElement('p');
+    words.appendChild(p);
+  }
 })
+
+recognition.addEventListener('end', recognition.start);
 
 recognition.start();
